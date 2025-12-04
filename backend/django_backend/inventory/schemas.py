@@ -1,0 +1,90 @@
+from ninja import Schema
+from typing import List
+import uuid
+
+# Item schema sent from React
+class GrnItemCreateSchema(Schema):
+    item_name: str
+    quantity: int
+    unit_measurement: str
+    internal_code: str
+
+# Main GRN creation schema
+class GrnCreateSchema(Schema):
+    supplier_name: str
+    grn_no: str
+    plate_no: str
+    purchase_no: str
+    items: List[GrnItemCreateSchema]
+
+# Response schema
+class GrnItemSchema(Schema):
+    item_id: uuid.UUID
+    item_name: str
+    quantity: int
+    unit_measurement: str
+    
+
+class GrnDetailSchema(Schema):
+    id: uuid.UUID
+    supplier_name: str
+    grn_no: str
+    plate_no: str
+    purchase_no: str
+    items: List[GrnItemSchema]
+
+class GRNListSchema(Schema):
+    supplier_name: str
+    grn_no: str
+    purchase_no: str
+
+class GRNDetailSchema(Schema):
+    supplier_name: str
+    grn_no: str
+    plate_no: str
+    purchase_no: str
+    items: List[GrnItemSchema]
+
+# DN Schemas
+
+class DnItemCreateSchema(Schema):
+    item_name: str
+    quantity: int
+    unit_measurement: str
+    internal_code: str
+
+# Main DN creation schema
+class DnCreateSchema(Schema):
+    customer_name: str
+    dn_no: str
+    plate_no: str
+    sales_no: str
+    items: List[DnItemCreateSchema]
+
+# Response schema
+class DnItemSchema(Schema):
+    item_id: uuid.UUID
+    item_name: str
+    quantity: int
+    unit_measurement: str
+    
+
+class DnDetailSchema(Schema):
+    id: uuid.UUID
+    customer_name: str
+    dn_no: str
+    plate_no: str
+    sales_no: str
+    items: List[DnItemSchema]
+
+class DNListSchema(Schema):
+    customer_name: str
+    dn_no: str
+    sales_no: str
+
+# class DNDetailSchema(Schema):
+#     customer_name: str
+#     dn_no: str
+#     plate_no: str
+#     sales_no: str
+#     items: List[DnItemSchema]
