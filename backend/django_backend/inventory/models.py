@@ -8,6 +8,10 @@ class GRN(models.Model):
     grn_no = models.CharField(max_length=255)
     plate_no = models.CharField(max_length=255)
     purchase_no = models.CharField(max_length=255)
+    date = models.DateField(null=False, blank=False, auto_now = True)
+    ECD_no = models.CharField(max_length=255, blank=True, null=True)
+    transporter_name = models.CharField(max_length=255, blank=True, null=True)
+    storekeeper_name = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"{self.grn_no} ({self.supplier_name})"
@@ -19,6 +23,7 @@ class GrnItems(models.Model):
     quantity = models.IntegerField()
     unit_measurement = models.CharField(max_length=100)
     internal_code = models.CharField(max_length=100, blank=True, null=True)
+    bags = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.grn} - {self.item_name} "
@@ -29,6 +34,10 @@ class DN(models.Model):
     dn_no = models.CharField(max_length=255, unique=True)
     plate_no = models.CharField(max_length=255)
     sales_no = models.CharField(max_length=255)
+    date = models.DateField(null=False, blank=False, auto_now=True)
+    ECD_no = models.CharField(max_length=255, blank=True, null=True)
+    transporter_name = models.CharField(max_length=255, blank=True, null=True)
+    storekeeper_name = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"{self.dn_no} ({self.customer_name})"
@@ -40,6 +49,7 @@ class DNItems(models.Model):
     quantity = models.IntegerField()
     unit_measurement = models.CharField(max_length=100)
     internal_code = models.CharField(max_length=100, blank=True, null=True)
+    bags = models.FloatField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.dn} - {self.item_name} "
