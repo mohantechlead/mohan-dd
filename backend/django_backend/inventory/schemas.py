@@ -89,3 +89,19 @@ class DnDetailSchema(Schema):
     dn_no: str
     sales_no: str
     items: List[DnItemSchema]
+
+class ItemCreateSchema(Schema):
+    item_id: uuid
+    item_name: str
+    hscode: str
+    internal_code: str
+    
+class StockCreateSchema(Schema):
+    item_id: uuid
+    item_name: str
+    hscode: str
+    internal_code: str
+    quantity: float
+    unit_measurement: str
+    package: float
+    package_type: str

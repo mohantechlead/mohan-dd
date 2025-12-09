@@ -58,3 +58,24 @@ class DNItems(models.Model):
     def __str__(self):
         return f"{self.dn} - {self.item_name} "
 
+class Items(models.Model):
+    item_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    item_name = models.CharField(max_length=255)
+    hscode = models.CharField(max_length=255)
+    internal_code = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.item_name} - {self.item_name} - {self.internal_code}"
+
+class Stock(models.Model):
+    item_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    item_name = models.CharField(max_length=255)
+    hscode = models.CharField(max_length=255)
+    internal_code = models.CharField(max_length=100, blank=True, null=True)
+    quantity = models.FloatField(max_length=100, blank=True, null=True)
+    unit_measurement = models.CharField(max_length=100)
+    package = models.FloatField(blank=True, null=True)
+    package_type = models.CharField(max_length=100, blank=True, null=True)
+
+    def __str__(self):
+        return f"{self.item_name} - {self.item_name} - {self.internal_code}"
