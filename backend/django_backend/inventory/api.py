@@ -9,7 +9,7 @@ import uuid
 router = Router()
 
 
-@router.post("/grn/create", response=GrnDetailSchema)
+@router.post("/grn", response=GrnDetailSchema)
 def create_grn(request, payload: GrnCreateSchema):
 
     # Create GRN
@@ -19,6 +19,10 @@ def create_grn(request, payload: GrnCreateSchema):
         grn_no=payload.grn_no,
         plate_no=payload.plate_no,
         purchase_no=payload.purchase_no,
+        date = payload.date,
+        ECD_no = payload.ECD_no,
+        transporter_name = payload.transporter_name,
+        storekeeper_name = payload.storekeeper_name,
     )
 
     # Create Items
@@ -30,7 +34,8 @@ def create_grn(request, payload: GrnCreateSchema):
             item_name=item.item_name,
             quantity=item.quantity,
             unit_measurement=item.unit_measurement,
-            internal_code = item.internal_code
+            internal_code = item.internal_code,
+            bags = item.bags
         )
         created_items.append(new_item)
 
@@ -44,7 +49,7 @@ def create_grn(request, payload: GrnCreateSchema):
         "items": created_items
     }
 
-@router.get("", response=List[GRNListSchema])
+@router.get("/grn", response=List[GRNListSchema])
 def list_GRN(request):
     qs = GRN.objects.all()
     return qs

@@ -1,13 +1,16 @@
 from ninja import Schema
 from typing import List
 import uuid
+from datetime import date
 
 # Item schema sent from React
 class GrnItemCreateSchema(Schema):
     item_name: str
     quantity: int
     unit_measurement: str
+    bags: str
     internal_code: str
+   
 
 # Main GRN creation schema
 class GrnCreateSchema(Schema):
@@ -15,6 +18,10 @@ class GrnCreateSchema(Schema):
     grn_no: str
     plate_no: str
     purchase_no: str
+    date: date
+    ECD_no: str
+    transporter_name: str
+    storekeeper_name: str 
     items: List[GrnItemCreateSchema]
 
 # Response schema
@@ -37,6 +44,7 @@ class GRNListSchema(Schema):
     supplier_name: str
     grn_no: str
     purchase_no: str
+    items: List[GrnItemSchema]
 
 class GRNDetailSchema(Schema):
     supplier_name: str

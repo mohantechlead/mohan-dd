@@ -47,7 +47,6 @@ export function LoginForm({
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     
-
     event.preventDefault();
 
     const form = event.currentTarget;
@@ -69,8 +68,7 @@ export function LoginForm({
     if (response.ok) {
       console.log("Logged in");
       auth?.login(data?.username);
-      router.push('/home')
-
+      router.push('/diredawa/inventory/grn/create');
     } else {
       console.log("Login failed", data);
     }
