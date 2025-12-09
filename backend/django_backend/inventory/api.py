@@ -3,7 +3,9 @@ from typing import List
 from django.shortcuts import get_object_or_404
 from .models import GRN, GrnItems, DN, DNItems
 from .schemas import GrnCreateSchema, GrnDetailSchema, GRNListSchema 
-from .schemas import DnCreateSchema, DnDetailSchema, DNListSchema 
+from .schemas import DnCreateSchema, DnDetailSchema 
+from .schemas import ItemCreateSchema
+from .models import Items, Stock
 import uuid
 
 router = Router()
@@ -61,7 +63,7 @@ def get_GRN(request, grn_no: str):
 
 # Add more endpoints as needed for DN and other functionalities
 
-@router.post("/dn/create", response=DnDetailSchema)
+@router.post("/dn", response=DnDetailSchema)
 def create_dn(request, payload: DnCreateSchema):
 
     # Create DN
@@ -71,6 +73,14 @@ def create_dn(request, payload: DnCreateSchema):
         dn_no=payload.dn_no,
         plate_no=payload.plate_no,
         sales_no=payload.sales_no,
+        date = payload.date,
+        ECD_no = payload.ECD_no,
+        invoice_no = payload.invoice_no,
+        gatepass_no = payload.gatepass_no,
+        despathcher_name = payload.despathcher_name,
+        receiver_name = payload.receiver_name,
+        receiver_phone = payload.receiver_phone,
+        authorized_by = payload.authorized_by,
     )
 
     # Create Items
@@ -96,12 +106,35 @@ def create_dn(request, payload: DnCreateSchema):
         "items": created_items
     }
 
-@router.get("/dn/list", response=List[DNListSchema])
+@router.get("/dn", response=List[DnDetailSchema])
 def list_DN(request):
     qs = DN.objects.all()
     return qs
 
-@router.get("/dn/{dn_no}", response=DnDetailSchema)
-def get_DN(request, dn_no: str):
-    return get_object_or_404(DN, dn_no=dn_no)
+# @router.get("/dn/{dn_no}", response=DnDetailSchema)
+# def get_DN(request, dn_no: str):
+#     return get_object_or_404(DN, dn_no=dn_no)
 
+@router.post("/items", response=ItemCreateSchema)
+def create_item(request, payload: ItemCreateSchema):
+
+    # Create DN
+    item = Items.objects.create(
+        item_id=uuid.uuid4(),
+        item_name = payload.item_name,
+        hscode = payload.hscode,
+        internal_code = payload.internal_code
+    )
+
+
+    # Return structured response
+    return {
+        "item_name": item.item_name,
+        "hscode": item.hscode,
+        "internal_code": item.internal_code
+    }
+
+@router.post("/items", response=ItemCreateSchema)
+def display_item(request):
+    items = Items.objects.all()
+    return items
