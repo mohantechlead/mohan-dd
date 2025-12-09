@@ -2,6 +2,8 @@
 
 import { Form } from "@/components/form";
 import { ItemsForm } from "@/components/itemsform";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 interface GrnFormValues {
   date: string;
@@ -21,10 +23,15 @@ interface GrnFormValues {
   }[];
 }
 
+const GRN_API_URL = "/api/inventory/grn"
+
+
 
 
 export default function HomePage() {
+  const router = useRouter();
   const handleSubmit = async (values: GrnFormValues) => {
+    
     console.log("Form submitted:", values);
   
     // Transform values to match backend schema exactly
@@ -49,7 +56,7 @@ export default function HomePage() {
     console.log("Payload sent to backend:", payload);
   
     try {
-      const res = await fetch("http://localhost:8000/api/inventory/grn/create", {
+      const res = await fetch(GRN_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload), // send raw object
@@ -70,10 +77,16 @@ export default function HomePage() {
       alert("Failed to submit");
     }
   };
-  
 
+  
+  
   return (
-    <div className="max-w-3xl mx-auto mt-10">
+    
+    <div className="max-w-xl mx-auto mt-4">
+      <div className="flex justify-start mb-10">
+      <Button onClick={() => router.push("/diredawa/inventory/grn/display")}> Display GRN</Button>
+      </div>
+      
       <h1 className="text-2xl font-bold mb-6 text-center">Create GRN</h1>
 
       <Form<GrnFormValues>
