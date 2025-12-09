@@ -36,8 +36,12 @@ class DN(models.Model):
     sales_no = models.CharField(max_length=255)
     date = models.DateField(null=False, blank=False, auto_now=True)
     ECD_no = models.CharField(max_length=255, blank=True, null=True)
-    transporter_name = models.CharField(max_length=255, blank=True, null=True)
-    storekeeper_name = models.CharField(max_length=255, blank=True, null=True)
+    invoice_no = models.CharField(max_length=255, blank=True, null=True)
+    gatepass_no = models.CharField(max_length=255, blank=True, null=True)
+    despathcher_name = models.CharField(max_length=255, blank=True, null=True)
+    receiver_name = models.CharField(max_length=255, blank=True, null=True)
+    receiver_phone = models.CharField(max_length=20, blank=True, null=True)
+    authorized_by = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"{self.dn_no} ({self.customer_name})"

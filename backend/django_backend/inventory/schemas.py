@@ -46,6 +46,7 @@ class GRNListSchema(Schema):
     purchase_no: str
     items: List[GrnItemSchema]
 
+#double
 class GRNDetailSchema(Schema):
     supplier_name: str
     grn_no: str
@@ -67,32 +68,24 @@ class DnCreateSchema(Schema):
     dn_no: str
     plate_no: str
     sales_no: str
+    date: date
+    ECD_no: str
+    invoice_no: str
+    gatepass_no: str
+    despathcher_name: str
+    receiver_name: str
+    receiver_phone: str
+    authorized_by: str
     items: List[DnItemCreateSchema]
 
 # Response schema
 class DnItemSchema(Schema):
-    item_id: uuid.UUID
     item_name: str
     quantity: int
     unit_measurement: str
     
-
 class DnDetailSchema(Schema):
-    id: uuid.UUID
     customer_name: str
     dn_no: str
-    plate_no: str
     sales_no: str
     items: List[DnItemSchema]
-
-class DNListSchema(Schema):
-    customer_name: str
-    dn_no: str
-    sales_no: str
-
-# class DNDetailSchema(Schema):
-#     customer_name: str
-#     dn_no: str
-#     plate_no: str
-#     sales_no: str
-#     items: List[DnItemSchema]
