@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from .models import GRN, GrnItems, DN, DNItems
 from .schemas import GrnCreateSchema, GrnDetailSchema, GRNListSchema 
 from .schemas import DnCreateSchema, DnDetailSchema 
-from .schemas import ItemCreateSchema
+from .schemas import ItemCreateSchema, ItemSchema
 from .models import Items, Stock
 import uuid
 
@@ -111,10 +111,6 @@ def list_DN(request):
     qs = DN.objects.all()
     return qs
 
-# @router.get("/dn/{dn_no}", response=DnDetailSchema)
-# def get_DN(request, dn_no: str):
-#     return get_object_or_404(DN, dn_no=dn_no)
-
 @router.post("/items", response=ItemCreateSchema)
 def create_item(request, payload: ItemCreateSchema):
 
@@ -134,7 +130,7 @@ def create_item(request, payload: ItemCreateSchema):
         "internal_code": item.internal_code
     }
 
-@router.post("/items", response=ItemCreateSchema)
+@router.get("/items", response=list[ItemSchema])
 def display_item(request):
     items = Items.objects.all()
     return items

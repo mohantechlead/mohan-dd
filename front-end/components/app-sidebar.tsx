@@ -125,15 +125,15 @@ const data = {
         },
         {
           title: "DN",
-          url: "#",
+          url: "/diredawa/inventory/dn/create",
         },
         {
           title: "Items",
-          url: "#",
+          url: "/diredawa/inventory/items/create",
         },
         {
           title: "Stock",
-          url: "#",
+          url: "/diredawa/inventory/stock/display",
         },
       ],
     },
