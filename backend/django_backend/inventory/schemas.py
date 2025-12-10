@@ -91,13 +91,16 @@ class DnDetailSchema(Schema):
     items: List[DnItemSchema]
 
 class ItemCreateSchema(Schema):
-    item_id: uuid
+    item_name: str
+    hscode: str
+    internal_code: str
+
+class ItemSchema(Schema):
     item_name: str
     hscode: str
     internal_code: str
     
 class StockCreateSchema(Schema):
-    item_id: uuid
     item_name: str
     hscode: str
     internal_code: str
