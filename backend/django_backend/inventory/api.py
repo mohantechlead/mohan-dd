@@ -2,9 +2,9 @@ from ninja import Router
 from typing import List
 from django.shortcuts import get_object_or_404
 from .models import GRN, GrnItems, DN, DNItems
-from .schemas import GrnCreateSchema, GrnDetailSchema, GRNListSchema 
-from .schemas import DnCreateSchema, DnDetailSchema 
-from .schemas import ItemCreateSchema, ItemSchema
+from .schemas import GrnCreateSchema, GrnDetailSchema, GRNListSchema, GrnItemSchema
+from .schemas import DnCreateSchema, DnDetailSchema, DnItemSchema
+from .schemas import ItemCreateSchema, ItemSchema, StockSchema
 from .models import Items, Stock
 import uuid
 
@@ -134,3 +134,46 @@ def create_item(request, payload: ItemCreateSchema):
 def display_item(request):
     items = Items.objects.all()
     return items
+
+@router.get("/stock", response=list[StockSchema])
+def display_stock(request):
+    grns = GrnItems.objects.all()
+    dns = DNItems.objects.all()
+    items = Items.objects.all()
+
+    stock_list = []
+
+    for item in items:
+        # matching GRN and DN for this item
+        grn = grns.filter(internal_code=item.internal_code).first()
+        dn = dns.filter(internal_code=item.internal_code).first()
+
+        stock_quantity = 0
+        stock_bags = 0
+        item_name = item.item_name
+
+        if grn and dn:
+            stock_quantity = grn.quantity - dn.quantity
+            stock_bags = grn.bags - dn.bags
+
+        elif grn:
+            stock_quantity = grn.quantity
+            stock_bags = grn.bags
+
+        elif dn:
+            stock_quantity = -dn.quantity
+            stock_bags = -dn.bags
+
+        stock_list.append({
+            "item_name": item_name,
+            "quantity": stock_quantity,
+            "package": stock_bags,
+            "hscode": item.hscode,
+            "internal_code": item.internal_code,
+            "unit_measurement": grn.unit_measurement if grn else (dn.unit_measurement if dn else ""),
+        })
+
+    return stock_list
+  
+
+    

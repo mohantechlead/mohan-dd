@@ -60,7 +60,7 @@ export default function HomePage() {
       <Button onClick={() => router.push("/diredawa/inventory/items/display")}> Display Items</Button>
       </div>
       
-      <h1 className="text-2xl font-bold mb-6 text-center">Create GRN</h1>
+      <h1 className="text-2xl font-bold mb-6 text-center">Create Item</h1>
 
       <Form<ItemFormValues>
         fields={[
