@@ -29,7 +29,9 @@ class GrnItemSchema(Schema):
     item_id: uuid.UUID
     item_name: str
     quantity: int
+    bags: float
     unit_measurement: str
+    internal_code: str
     
 
 class GrnDetailSchema(Schema):
@@ -61,6 +63,7 @@ class DnItemCreateSchema(Schema):
     quantity: int
     unit_measurement: str
     internal_code: str
+    bags: float
 
 # Main DN creation schema
 class DnCreateSchema(Schema):
@@ -83,6 +86,8 @@ class DnItemSchema(Schema):
     item_name: str
     quantity: int
     unit_measurement: str
+    internal_code: str
+    bags: float
     
 class DnDetailSchema(Schema):
     customer_name: str
@@ -100,11 +105,11 @@ class ItemSchema(Schema):
     hscode: str
     internal_code: str
     
-class StockCreateSchema(Schema):
+class StockSchema(Schema):
     item_name: str
     hscode: str
     internal_code: str
     quantity: float
     unit_measurement: str
     package: float
-    package_type: str
+ 
