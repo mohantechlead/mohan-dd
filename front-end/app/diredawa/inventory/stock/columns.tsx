@@ -13,6 +13,11 @@ export const columns: ColumnDef<Items>[] = [
         accessorKey: "item_name",
         header: "Item Name",
       },
+  
+      {
+        accessorKey: "internal_code",
+        header: "Internal Code",
+      },
   {
     accessorKey: "quantity",
     header: "Stock Quantity",
@@ -22,4 +27,5 @@ export const columns: ColumnDef<Items>[] = [
     accessorKey: "package",
     header: "Stock Bags",
   },
+  
 ]

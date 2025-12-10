@@ -87,7 +87,7 @@ class DnItemSchema(Schema):
     quantity: int
     unit_measurement: str
     internal_code: str
-    bags: float
+    bags: int
     
 class DnDetailSchema(Schema):
     customer_name: str

@@ -30,10 +30,7 @@ export default function DemoPage() {
 
   return (
     <div className="container mx-auto py-10">
-      <div className="flex justify-start my-4">
-      <Button onClick={() => router.push('/diredawa/inventory/items/create')}>Create Items</Button>
-      </div>
-      <h1 className="text-2xl text-center my-2 font-bold">Items List</h1>
+      <h1 className="text-2xl text-center my-2 font-bold">Stocks List</h1>
       <DataTable columns={columns} data={data || [] } />
     </div>
   );
