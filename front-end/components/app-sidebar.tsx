@@ -133,7 +133,7 @@ const data = {
         },
         {
           title: "Stock",
-          url: "/diredawa/inventory/stock/display",
+          url: "/diredawa/inventory/stock",
         },
       ],
     },

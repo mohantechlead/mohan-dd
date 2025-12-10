@@ -87,7 +87,7 @@ export default function DN() {
     <div className="max-w-3xl mx-auto mt-10">
 
       <div>
-        <Button onClick={() => router.push('/diredawa/inventory/dn/display')}>Display GRN</Button>
+        <Button onClick={() => router.push('/diredawa/inventory/dn/display')}>Display DN</Button>
       </div>
 
       <h1 className="text-2xl font-bold mb-6 text-center">Create DN</h1>

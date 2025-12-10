@@ -12,7 +12,7 @@ export type DNItem = {
 
 export type DN = {
   dn_no: string
-  customer_name: number
+  customer_name: string
   sales_no: string
   items: DNItem
 }
